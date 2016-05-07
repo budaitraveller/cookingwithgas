@@ -9,11 +9,11 @@
 title: Cooking With Gas
 email: budaitraveller2@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Developing and analyzing Smart Contracts while exploring the Blockchain.
+  Notes and memoirs from a team developing and analyzing smart contracts.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://noeth.github.io" # the base hostname & protocol for your site
-twitter_username: noeth
-github_username:  noeth
+url: "" # the base hostname & protocol for your site
+twitter_username: 
+github_username: budaitraveller
 
 # Build settings
 markdown: kramdown
