@@ -3,10 +3,14 @@
 
 Configured as per: https://help.github.com/articles/setting-up-your-github-pages-site-locally-with-jekyll/
 
+This works pretty well. 
+
 # Issues
 
-Can't view css locally due to: https://github.com/jekyll/jekyll/issues/332
-Have to work around that ourselves at some point
+Todo-issues are here: https://github.com/budaitraveller/cookingwithgas/issues
 
-For now, run with:
+For now, run locally with:
+
 bundle exec jekyll serve --baseurl ''
+
+That is due to: https://github.com/jekyll/jekyll/issues/332
