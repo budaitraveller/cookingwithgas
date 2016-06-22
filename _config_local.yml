@@ -1,0 +1,14 @@
+
+# Site settings
+title: Cooking With Gas
+email: budaitraveller2@gmail.com
+description: A blog exploring Smart Contract development and analysis. 
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://localhost:4000" # the base hostname & protocol for your site
+twitter_username: budaitraveller 
+github_username: budaitraveller
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+exclude: ["node_modules", "gulpfile.js", "package.json"]
