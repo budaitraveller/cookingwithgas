@@ -17,3 +17,7 @@ bundle exec jekyll serve --watch --baseurl=
 Just push to gh-pages
 
 Note that it usually takes a few minutes for the site to build when you push to github.
+
+## Using categories
+
+They don't really work the way you would like them to.  You have to add a category html file manually, and add the category to the nav menu manually.  Actually, looks like the whole category setup is pretty busted.  Need to fix it up.
