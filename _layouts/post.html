@@ -1,15 +1,27 @@
 ---
 layout: default
+title: Home
 ---
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
-  </header>
+<div class='xs-12 topBar hidden'>
+  <p>{{ page.title }}</p>
+</div>
 
-  <div class="post-content" itemprop="articleBody">
-    {{ content }}
+<div class="xs-12 imgBack textCenter vertCenter banner" style='background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ), url({{ site.url }}/assets/img/{{ page.thumbnail }})'>
+  <div>
+    <a class='caps post-title' href='{{ post.url }}'>{{ page.title }}</a>
+    <p class='meta'>{{ page.date | date_to_long_string }} / by {{ page.author }}</p>
   </div>
+</div>
 
-</article>
+<div class='divider xs-12 topBarTrigger'></div>
+
+<div class='post-wrap'>
+  <h1>{{ page.title }}</h1>
+  <p class='meta'>
+    {{ page.author }} // {{ page.date | date_to_long_string }}
+  </p>
+
+  {{ content }}
+
+</div>

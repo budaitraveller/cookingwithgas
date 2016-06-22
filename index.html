@@ -1,23 +1,61 @@
 ---
 layout: default
+title: Home
 ---
 
-<div class="home">
+{% for post in site.posts limit:1 %}
+<div class="xs-12 imgBack link textCenter vertCenter grow tall" style='background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ), url({{ site.url }}/assets/img/{{ post.thumbnail }})'>
+  <div>
+    <a class='caps post-title' href='{{ post.url }}'>{{ post.title }}</a>
+    <p class='meta'>{{ post.date | date_to_long_string }} / by {{ post.author }}</p>
+  </div>
+</div>
+{% endfor %}
 
-  <h1 class="page-heading">Posts</h1>
+<div class='flexbox wrap'>
+{% for post in site.posts limit:2 offset:1 %}
+  <div class="sm-6 imgBack link vertCenter textCenter grow short" style='background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ), url({{ site.url }}/assets/img/{{ post.thumbnail }})'>
+    <div>
+      <a class='caps post-title' href='{{ post.url }}'>{{ post.title }}</a>
+      <p class='meta'>{{ post.date | date_to_long_string }} / by {{ post.author }}</p>
+    </div>
+  </div>
+{% endfor %}
+</div>
+<div class='divider xs-12 grow'></div>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+<div class='flexbox'>
+{% for post in site.posts limit:2 offset:3 %}
+  <div class="sm-6 textPreview vertCenter grow short">
+    <div>
+      <a class='caps post-title' href='{{ post.url }}'>{{ post.title }}</a>
+      <p>{{ post.excerpt }}</p>
+      <p class='meta'>{{ post.date | date_to_long_string }} / by {{ post.author }}</p>
+    </div>
+  </div>
+{% endfor %}
+</div>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
+<div class='flexbox wrap'>
+{% for post in site.posts limit:3 offset:5 %}
+  <div class="sm-4 imgBack link vertCenter textCenter grow" style='background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1) ), url({{ site.url }}/assets/img/{{ post.thumbnail }})'>
+    <div>
+      <a class='caps post-title' href='{{ post.url }}'>{{ post.title }}</a>
+      <p class='meta'>{{ post.date | date_to_long_string }} / by {{ post.author }}</p>
+    </div>
+  </div>
+{% endfor %}
+</div>
+<div class='divider xs-12 grow'></div>
 
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+<div class='flexbox'>
+{% for post in site.posts limit:2 offset:8 %}
+  <div class="sm-6 textPreview vertCenter grow short">
+    <div>
+      <a class='caps post-title' href='{{ post.url }}'>{{ post.title }}</a>
+      <p>{{ post.excerpt }}</p>
+      <p class='meta'>{{ post.date | date_to_long_string }} / by {{ post.author }}</p>
+    </div>
+  </div>
+{% endfor %}
 </div>
