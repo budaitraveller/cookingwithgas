@@ -4,8 +4,8 @@ title: Cooking With Gas
 email: budaitraveller2@gmail.com
 description: A blog exploring Smart Contract development and analysis. 
 baseurl: "/cookingwithgas" # the subpath of your site, e.g. /blog
-url: "https://budaitraveller.github.io" # the base hostname & protocol for your site
-twitter_username: 
+url: "http://budaitraveller.github.io" # the base hostname & protocol for your site
+twitter_username: budaitraveller 
 github_username: budaitraveller
 
 # Build settings
