@@ -24,10 +24,15 @@ Note that it usually takes a few minutes for the site to build when you push to 
 
 They don't really work the way you would like them to.  You have to add a category html file manually, and add the category to the nav menu manually.  Actually, looks like the whole category setup is pretty busted.  Need to fix it up.
 
-##How to use URLS in Jekyll
+##How to use URLS with Jekyll/gh-pages
 
-Definitely read this - it's the best documentation on jekyll urls anywhere, bar none:
+Definitely read this - it's the best documentation on jekyll/gh-pages urls anywhere, bar none:
 
 http://downtothewire.io/2015/08/15/configuring-jekyll-for-user-and-project-github-pages/
+
+And here is the most useful documentation page for jekyll itself:
+
+http://jekyllrb.com/docs/configuration/#serve-command-options
+
 
 
