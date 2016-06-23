@@ -26,6 +26,8 @@ They don't really work the way you would like them to.  You have to add a catego
 
 ##How to use URLS in Jekyll
 
+Definitely read this - it's the best documentation on jekyll urls anywhere, bar none:
+
 http://downtothewire.io/2015/08/15/configuring-jekyll-for-user-and-project-github-pages/
 
 
