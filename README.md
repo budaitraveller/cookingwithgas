@@ -1,5 +1,7 @@
 #Cooking With Gas - a smart contract blog
 
+Site is here: https://budaitraveller.github.io/cookingwithgas/
+
 Uses Artist Theme: A Free Theme for Jekyll Sites (https://github.com/ninapetrop/Artist-Theme) - MIT licensed
 
 ##Build
