@@ -1,14 +1,17 @@
 ---
 layout: post
-title:  "Tooling up for smart contract development with ethereum."
+title:  "Tooling up for smart contract development - The Good Parts."
 date:   2016-01-31 09:11:03
-description: Tooling up for ethereum smart contract development with geth browser-solidity and thet ethereum testnet
+description: Tooling up for ethereum smart contract development with geth, browser-solidity, and thet ethereum testnet.
 thumbnail: person1.jpeg
 categories: category1 category2
 
 # Information for the author block
-author: Nina Petropoulos
+author: Budai Traveller
+
 ---
+
+[Notes in brackets - remove when complete.]
 
 This article will walk you through developing contracts using:
 
