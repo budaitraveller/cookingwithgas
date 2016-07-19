@@ -13,11 +13,19 @@ author: Budai Traveller
 
 [Notes in brackets - remove when complete.]
 
-This article will walk you through developing contracts using:
+This article will walk you through developing smart contracts using tools that we have found to be reliable.  It will take you step by step from downloading the software you need, through deploying your first contract to the testnet.  
+
+Many brain cells died to bring you this information.  We have read many of the tutorials on this topic.  All of them were found lacking.
+
+This tutorial has been tested several times.  When we mention a tool, we will mention the download location, the version, the md5sum, and the date the tool was tested. 
+
+These are the tools we will use:
 
 The ethereum CLI tool "geth"
 The solidity web IDE "browser-solidity"
 The ethereum "testnet" blockchain.  
+
+There are dozens of tutorials 
 
 You will need to understand how to use the command line, how to write software, and the very basics of blockchain terminology and ethereum.
 
