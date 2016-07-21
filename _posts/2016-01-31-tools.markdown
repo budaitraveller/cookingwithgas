@@ -17,7 +17,6 @@ author: Budai Traveller
 
 [There is a separate keystore for tesnet, check for that throughout]
 
-[Joel tested with: instance: Geth/v1.4.7-stable-667a386d/darwin/go1.6.2]
 
 [Might consider adding some loadScript commands: https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts]
 
@@ -30,50 +29,61 @@ You will go nuts if you copy and paste stuff
 
 [Need to add to the top sidebar - where to get help - where to report github issues for the post]
 
-[Rich tested with:
-
-Richards-MacBook-Pro-2:~ rsb$ geth version
-Geth
-Version: 1.3.6
-Git Commit: 9e323d65b20c32ab1db40e8dde7172826e0e9c45
-Protocol Versions: [63 62 61]
-Network Id: 1
-Go Version: go1.6.1
-OS: darwin
-GOPATH=/Users/rsb/src/gocode
-GOROOT=/usr/local/Cellar/go/1.6.1/libexec
-
-]
 
 [Make all links into real links]
 
 [Add screenshots]
 
-This article will walk you through developing smart contracts using tools that we have found to be reliable.  It will take you step by step from downloading the software you need, through deploying your first contract to the testnet.  
 
-Many brain cells died to bring you this information.  We have read many of the tutorials on this topic.  All of them were found lacking.
+#Motivation for this series:
 
-This tutorial has been tested several times.  When we mention a tool, we will mention the download location, the version, the md5sum, and the date the tool was tested. 
+This is the first article in a series on tools for smart contract development.
 
-These are the tools we will use:
+At the time of this writing, the state of ethereum smart contract development tools and documentation was: sub-optimal.  A beginner could spend many days banging their head against documentation and tools so buggy as to be barely functional in combination.  
 
-The ethereum CLI tool "geth"
-The solidity web IDE "browser-solidity"
-The ethereum "testnet" blockchain.  
+In developing this article, and by fixing issues that you report, we hope that together we might save a few bothans, many of whom have already died to bring you this information.
 
-There are dozens of tutorials 
+#Test log:
 
-You will need to understand how to use the command line, how to write software, and the very basics of blockchain terminology and ethereum.
+This tutorial tested working by:
 
-This is an article that will focus on "tooling up" - showing you the right tools to use.  There are a lot of tools out there in the ethereum development space - many of them are not worth investing in.  The tools we'll go over here are well worth learning.
+07/20/2016: JD: Geth: 1.4.7-stable, Go: 1.6.2, OSX 11]
+07/19/2016: RB: Geth: 1.3.6, Go: 1.6.1, OSX 10.9]
 
-###Step 1 
+#Last updated: 
 
-get geth
+07/21/2016
 
-See: https://www.ethereum.org/cli
+#Audience:
 
-###Step 2
+Developers who have never developed an ethereum smart contract (or given up in frustration attempting to do so).  You should already know:
+
+* How to use the command line
+* How to write software
+* The basic terminology of blockchain tech and ethereum
+
+#Goals:
+
+This article will walk you, step by step, through deploying your first smart contract on the ethereum testnet blockchain.  This is *not* an article on the programming language solidity - those articles will come later.
+
+When you have completed this tutorial, you will have a reliable set of tools that a beginning smart contract developer can use to develop ethereum smart contracts.
+
+#Tools we will use:
+
+(We'll show you how to get these as we go)
+* The ethereum CLI tool "geth"
+* The solidity web IDE "browser-solidity"
+* The ethereum "testnet" blockchain.  
+
+#Steps
+
+##Step 1 
+
+get geth here: https://www.ethereum.org/cli
+
+[Screenshot]({{ site.url }}/assets/img/tools_article/
+
+##Step 2
 
 Launch geth as follows:
 
@@ -99,7 +109,7 @@ bash-3.2$ echo "geth --testnet --rpc --rpccorsdomain '*' console" > ~/bin/runget
 bash-3.2$ chmod +x ~/bin/rungeth.sh
 ```
 
-###Step 3
+##Step 3
 
 Create and unlock an account: 
 
@@ -179,7 +189,7 @@ Finally, a note on deleting accounts: Rather than blowing those files away to de
     mv oldkeys.tgz.enc ~/place_I_store_encrypted_stuff_that_gets_backed_up
 ```
 
-###Step 4
+##Step 4
 
 To continue, you are going to need to obtain the full testnet blockchain, and obtain some testnet ether.  We'll show you how to do that the old fashioned way, by syncing your blockchain and mining some ether.
 
@@ -272,13 +282,13 @@ To use this method, copy your friends /chaindata directory contents into your /c
 
 Then, run geth as before, and when have them send some ether to your account.  A few blocks later on the testnet, your ether will appear.
 
-###Step 5
+##Step 5
 
 Go to the online compiler at : http://ethereum.github.io/browser-solidity/#version=soljson-latest.js
 
 NOTE: For the moment, use http for that URL, not https.
 
-###Step 6
+##Step 6
 
 Create a contract... I suggest:
 
@@ -293,15 +303,15 @@ contract HelloWorld{
 }
 ```
 
-###Step 7
+##Step 7
 
 On the right hand side of the online compiler, click on the little tab that has a icon of a Box on it, which appears between the paper airplane tab and the cloud upload tab. (hereafter the block tab will be called the "Environment" tab)
 
-###Step 8 
+##Step 8 
 
 In the Environment tab select the radio button for **web3 provider**, and make sure web3 provider endpoint is set to `http://localhost:8545`
 
-###Step 9
+##Step 9
 
 Click the red "create" button....
 
@@ -315,11 +325,11 @@ If you see:
   *"Error: could not unlock signer account" 
      * it probably means you forgot to unlock your account, or the account timed out and locked - try step #3
 
-###Step 10
+##Step 10
 
 Your contract is now technically deployed. You have two options, you can interact with it through the web editor, or through the geth console... Let's play with it on the geth console first....
 
-###Step 11
+##Step 11
 
 This step is a little tricky.
 
@@ -329,7 +339,7 @@ It should look something like this:
 
 `[{"constant":false,"inputs":[{"name":"newMessage","type":"string"}],"name":"setMessage","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"message","outputs":[{"name":"","type":"string"}],"type":"function"}]`
 
-###Step 12
+##Step 12
 
 Go to the geth console.  We are going to create the contract on the console.
 
@@ -366,7 +376,7 @@ Problems you might run into:
   * unlock it with: personal.unlockAccount("address", "password")
 
 
-###Step 13
+##Step 13
 
 Now you have the contract under helloworld. In the console type:
 `> helloWorld` and you should see something like this:
@@ -379,12 +389,12 @@ Now you have the contract under helloworld. In the console type:
 }
 ```
 
-###Step 14
+##Step 14
 
 Try getting the message from helloWorld, which is currently unset by calling:
 `helloWorld.message.call()`
 
-###Step 15
+##Step 15
 
 Try setting the message from helloWorld by calling:
 
@@ -394,11 +404,11 @@ This will cost you a little bit of gas on the testnet, maybe 200,000.  That woul
 
 you **must wait for blocks to be mined before this takes effect**, I usually wait for at least **2** blocks to be mined because sometimes it doesn't get caught in the first block
 
-###Step 16
+##Step 16
 
 Try `helloWorld.message.call()` again. 
 
-###Step 17
+##Step 17
 
 Now lets try to use the online compiler to interact with it. This is useful, but I haven't figured out how to send money with transactions, which is a disadvantage for some of our more complicated contracts... but lets at least use the interface. because they are sort of fun
 
@@ -414,7 +424,7 @@ Decoded:
 string: Greetings Blockchain
 ```
 
-###Step 18
+##Step 18
 
 Lets try setting the value now... type **"Hello from the online compiler"** into the field next to the red button called "setMessage". *be sure to include the quotes marks on the string*
 
