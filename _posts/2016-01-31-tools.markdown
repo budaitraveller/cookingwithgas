@@ -5,24 +5,30 @@ date:   2016-01-31 09:11:03
 description: Tooling up for ethereum smart contract development with geth, browser-solidity, and thet ethereum testnet.
 thumbnail: person1.jpeg
 categories: category1 category2
-
-# Information for the author block
 author: Budai Traveller
 
 ---
-
 
 [Notes in brackets - remove as you finish - five or ten things to do]
 
 [Step 3: swap out the redirect geth command up front with the geth attach as the primary method, and the redirect as a side note]
 
-[Need to add info UP FRONT on how long it takes to download the testnet, and how log it takes to mine - time estimates.]
+[Need to add info UP FRONT on how long it takes to download the testnet, and how log it takes to mine - time estimates.  Also, a "here's what we're gonna do" paragraph up front, and a "here's what we did" paragraph at the end.]
 
 [There is a separate keystore for tesnet, check for that throughout]
 
 [Joel tested with: instance: Geth/v1.4.7-stable-667a386d/darwin/go1.6.2]
 
 [Might consider adding some loadScript commands: https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts]
+
+[At the end, point out that people can see their smart contract and transactions on etherscan.io, and collaborate with others on them]
+
+[
+You must assign your primary account to a variable for sanity's sake:  > me = eth.accounts[0] 
+You will go nuts if you copy and paste stuff
+]
+
+[Need to add to the top sidebar - where to get help - where to report github issues for the post]
 
 [Rich tested with:
 
@@ -270,6 +276,8 @@ Then, run geth as before, and when have them send some ether to your account.  A
 
 Go to the online compiler at : http://ethereum.github.io/browser-solidity/#version=soljson-latest.js
 
+NOTE: For the moment, use http for that URL, not https.
+
 ###Step 6
 
 Create a contract... I suggest:
@@ -301,11 +309,11 @@ You should see: "Waiting for transaction to be mined..." just below it
 
 If you see: 
 
-  *"Invalid JSON RPC response:" 
-     *That probably means geth isn't running, doesn't have the --rpc flag on it, is on a different port from 8545, or for some other reason can be found. **this error also occurs if you are using https to connect to the online editor** 
+  *"Invalid JSON RPC response:" or "Could not connect to http://localhost:8545"
+     *These are "connection" type errors.  They usually mean that either geth isn't running, or it doesn't have the --rpc flag on it, or it is on a different port from 8545, or for some other reason geth cannot be found and communicated with. **this error also occurs if you are using https to connect to the online editor**.  The actual error message you receive will be browser dependent.
 
   *"Error: could not unlock signer account" 
-     * it probably means you forgot to unlock your account... try step #3
+     * it probably means you forgot to unlock your account, or the account timed out and locked - try step #3
 
 ###Step 10
 
@@ -331,17 +339,26 @@ The format of the command will be:
 
 var helloWorld = eth.contract("YOUR_INTERFACE_STRING").at("YOUR_ACCOUNT_ADDRESS")
 
-You will then :
+To build this string, you will probably want to open your favorite text editor.
+
+You will then build a string that looks something like this with your ABI and addy:
 
 `var helloWorld = eth.contract([{"constant":false,"inputs":[{"name":"newMessage","type":"string"}],"name":"setMessage","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"message","outputs":[{"name":"","type":"string"}],"type":"function"}]
 ).at("<9bcd2d4f8dddea8f4ff303fe2052fc134b655c8a>")`
 
-`<address>` can be found either on an earlier line that should have appeared in your geth console stream when you clicked "create" in the online compiler. **note that it should be in double quotes inside the .at() call**
+The `<address>` is the contract address that got created when you clicked the create button in the solidity web compiler.
+
+It can be found either on an earlier line in your geth logs that will look something like this:
 
 `> I0718 14:20:18.814556   38882 xeth.go:1026] Tx(0x67d0e5c297f1fc12272dede2484366e1ae7c70e254ea645a4bcd911cc7e46138) created: 0x34f560368e973679a4e8644ee7d25a961b8662bb` (0x34f560368e973679a4e8644ee7d25a961b8662bb is the address)
 
-or in the online compiler 
-under "HelloWorld at 0x34f560368e973679a4e8644ee7d25a961b8662bb (blockchain)"
+Or in your solidity web compiler, in a line that will look something like this:
+
+"HelloWorld at 0x34f560368e973679a4e8644ee7d25a961b8662bb (blockchain)"
+
+**note that it should be in double quotes inside the .at() call**
+
+Transactions return: "undefined", so that's what you'll see.
 
 Problems you might run into: 
 
@@ -413,3 +430,11 @@ Testnet blockchain explorers (see your transactions on the testnet):
 
  https://testnet.etherscan.io/ 
  https://morden.ether.camp/ 
+
+
+Transactions and Calls:
+
+Transactions cost gas and store stuff on the blockchain
+Calls are free and don't store anything - they run locally on your copy of geth only.
+You made a call to setMessage, you didn't make any transactions.
+ 
