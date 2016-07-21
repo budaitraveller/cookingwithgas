@@ -1,0 +1,13 @@
+title: Cooking With Gas
+description: >
+	     Explorations in Smart Contract Development
+baseurl: "/cookingwithgas"
+url: "https://github.com/budaitraveller/cookingwithgas"
+paginate:	2 # The number of posts to show per page on your homepage
+name: "Budai Traveller"
+markdown: kramdown
+permalink: none
+kramdown:
+  parse_block_html: true
+gems:
+  - jekyll-paginate
