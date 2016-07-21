@@ -11,7 +11,37 @@ author: Budai Traveller
 
 ---
 
-[Notes in brackets - remove when complete.]
+
+[Notes in brackets - remove as you finish - five or ten things to do]
+
+[Step 3: swap out the redirect geth command up front with the geth attach as the primary method, and the redirect as a side note]
+
+[Need to add info UP FRONT on how long it takes to download the testnet, and how log it takes to mine - time estimates.]
+
+[There is a separate keystore for tesnet, check for that throughout]
+
+[Joel tested with: instance: Geth/v1.4.7-stable-667a386d/darwin/go1.6.2]
+
+[Might consider adding some loadScript commands: https://github.com/ethereum/go-ethereum/wiki/Managing-your-accounts]
+
+[Rich tested with:
+
+Richards-MacBook-Pro-2:~ rsb$ geth version
+Geth
+Version: 1.3.6
+Git Commit: 9e323d65b20c32ab1db40e8dde7172826e0e9c45
+Protocol Versions: [63 62 61]
+Network Id: 1
+Go Version: go1.6.1
+OS: darwin
+GOPATH=/Users/rsb/src/gocode
+GOROOT=/usr/local/Cellar/go/1.6.1/libexec
+
+]
+
+[Make all links into real links]
+
+[Add screenshots]
 
 This article will walk you through developing smart contracts using tools that we have found to be reliable.  It will take you step by step from downloading the software you need, through deploying your first contract to the testnet.  
 
@@ -52,7 +82,7 @@ Launch geth as follows:
 `console` means launch a console with this
 ```
 
-The last bit "2>> geth.log" pushes the annoying blockchain/mining info to a log file, and lets you use the console.  ***You can also run geth in one terminal, and in the other, "geth attach"***  
+The last bit "2>> geth.log" pushes the frequent blockchain/mining info to a log file, so that you can more easily use the console.  ***You can also run geth in one terminal, and in the other, "geth attach"***  
 
 If you get stuck: "exit"
 
@@ -67,16 +97,17 @@ bash-3.2$ chmod +x ~/bin/rungeth.sh
 
 Create and unlock an account: 
 
-Do this outside of the geth console on the command line:
+On the geth console, type:
 
 ```
-$ geth account new
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Passphrase:
-Repeat Passphrase:
+> personal.newAccount()
+Passphrase: 
+"0x1aefd704facfda6069270ab69ef73e847aa897cc"
 ```
 
-Now, to unlock your account, in the geth console (not on the command line) type this:
+That long string is your account address.
+
+Now, to unlock your account, in the geth console type this:
 
 ```
 > eth.accounts
@@ -87,10 +118,10 @@ You will see the address of the account you just made.  You must unlock that acc
 Using the address of the account you just displayed, and the password you used to create it, type
 
 ```
-personal.unlockAccount(0x9bcd2d4f8dddea8f4ff303fe2052fc134b655c8a, "your_password")
+personal.unlockAccount("0x9bcd2d4f8dddea8f4ff303fe2052fc134b655c8a", "your_password")
 ```
 
-You will get the response ***undefined***.  Most of the time, undefined means success on the geth console.
+You will get the response ***true***.  Most of the time, undefined or true means success on the geth console.
 
 Of course, save your password in a password database of your choosing.
 
@@ -112,7 +143,7 @@ Note that the response to a correct assignment is: ***undefined***
 And further, that your accounts are now located here:
 
 ```
-bash-3.2$ cd ~/Library/Ethereum/keystore/
+bash-3.2$ cd ~/Library/Ethereum/testnet/keystore/
 bash-3.2$ ls -la
 total 24
 drwx------   5 rsb  staff  170 Jul 18 14:34 .
@@ -122,7 +153,7 @@ drwxr-xr-x  10 rsb  staff  340 Jul 18 14:43 ..
 -rw-------   1 rsb  staff  491 Jul 18 14:34 UTC--2016-07-18T21-34-51.694566352Z--da05d4c4fba23675e8d0a8d553075b0bb9dd0121
 ```
 
-And note that the command "geth accounts list" does not do what you think it should (give you the account addresses, right?) - it gives you a unique index to the account that you won't use in this tutorial (or ever, most likely).  You can find your account addresses via the geth console:
+And note that the command ">geth --testnet account list" does not do what you think it should (give you the account addresses, right?) - it gives you a unique index to the account that you won't use in this tutorial (or ever, most likely).  You can find your account addresses via the geth console:
 
 ```
 > eth.accounts[0]
@@ -139,7 +170,7 @@ Finally, a note on deleting accounts: Rather than blowing those files away to de
     ls
     rm UTC*
     rm oldkeys.tgz
-    mv oldkeys.tgz.enc ~/place_I_store_stuff
+    mv oldkeys.tgz.enc ~/place_I_store_encrypted_stuff_that_gets_backed_up
 ```
 
 ###Step 4
@@ -156,12 +187,38 @@ I0718 18:57:19.859391   43671 blockchain.go:1251] imported 1 block(s) (0 queued 
 
 The message above imported only one block.  When you are just starting to sync down the blockchain, you will see messages that more than one block has been imported (often 256 blocks).
 
+These blocks have to come from somewhere, right?  They come from peers.  If you don't see blocks downloading, check to see if you have any peers with "net" commands on the console, like so:
+
+```
+> net.listening
+true
+> net.peerCount
+10
+```
+
+If you have no peers, you could have a firewall issue.  You will need to be able to connect to port 30303 on other systems to discover peers.  To get a little info from geth as to what ports it is using to communicate, type:
+
+```
+> admin.nodeInfo
+```
+
+You will get a whole bunch of json info back, including a section telling you what port geth is using outbound to discover other systems:
+
+```
+  ports: {
+    discovery: 30303,
+    listener: 30303
+  },
+```
+
 When your testnet blockchain is fully synced, you will see:
 
 * Messages reporting that one block at a time is being imported.
 * The block number in each message (looks like: #1333027) will match the highest block mined on ethernet block explorer sites (like: https://testnet.etherscan.io/) 
 
-####Mining the ether
+####Mining some ether
+
+NOTE: You have to be fully synced before you can mine.  Make sure you have the lastest block as per https://testnet.etherscan.io, then continue with this step.
 
 In the geth console, type:
 
@@ -230,7 +287,7 @@ contract HelloWorld{
 
 ###Step 7
 
-On the right hand side of the online compiler, click on the little tab that has a icon of a Box, which appears between the paper airplane and the cloud upload. (hereafter the block tab will be called the "Environment" tab)
+On the right hand side of the online compiler, click on the little tab that has a icon of a Box on it, which appears between the paper airplane tab and the cloud upload tab. (hereafter the block tab will be called the "Environment" tab)
 
 ###Step 8 
 
@@ -256,18 +313,28 @@ Your contract is now technically deployed. You have two options, you can interac
 
 ###Step 11
 
-In the web editor copy the text in the box "interface"... consider saving this text. It should look something like this: 
+This step is a little tricky.
+
+In the web editor copy the text in the box "interface"... 
+
+It should look something like this: 
 
 `[{"constant":false,"inputs":[{"name":"newMessage","type":"string"}],"name":"setMessage","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"message","outputs":[{"name":"","type":"string"}],"type":"function"}]`
 
 ###Step 12
 
-Go to the geth console, and create the contract
+Go to the geth console.  We are going to create the contract on the console.
 
-type:
+To do that we will create a variable called helloWorld, and assign it to an ethereum contract:
+
+The format of the command will be:
+
+var helloWorld = eth.contract("YOUR_INTERFACE_STRING").at("YOUR_ACCOUNT_ADDRESS")
+
+You will then :
 
 `var helloWorld = eth.contract([{"constant":false,"inputs":[{"name":"newMessage","type":"string"}],"name":"setMessage","outputs":[],"type":"function"},{"constant":true,"inputs":[],"name":"message","outputs":[{"name":"","type":"string"}],"type":"function"}]
-).at("<address>")`
+).at("<9bcd2d4f8dddea8f4ff303fe2052fc134b655c8a>")`
 
 `<address>` can be found either on an earlier line that should have appeared in your geth console stream when you clicked "create" in the online compiler. **note that it should be in double quotes inside the .at() call**
 
@@ -275,6 +342,12 @@ type:
 
 or in the online compiler 
 under "HelloWorld at 0x34f560368e973679a4e8644ee7d25a961b8662bb (blockchain)"
+
+Problems you might run into: 
+
+* If your account is locked: 
+  * unlock it with: personal.unlockAccount("address", "password")
+
 
 ###Step 13
 
