@@ -99,9 +99,21 @@ Developers who have never developed an ethereum smart contract (or given up in f
 
 Download and install the tool "geth" in accordance with: [The Ethereum CLI Dowload Page|https://www.ethereum.org/cli]
 
+Attempt 1:
+
 ![Screenshot]({{ site.url }}/assets/img/tools_article/download_eth_cli.png)
+
+Attempt 2:
+
 <img src="{{ site.url }}/assets/img/tools_article/download_eth_cli.png">
-[[https://github.com/username/repository/blob/master/img/octocat.png|alt=octocat]]
+
+Attempt 3: 
+
+[[https://github.com/budaitraveller/cookingwithgas/blob/gh-pages/assets/img/tools_article/download_eth_cli.png|alt=octocat]]
+
+Attempt 4:
+
+[cli image](/assets/img/tools_article/download_eth_cli.png)
 
 ##Step 2
 
